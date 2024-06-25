@@ -59,4 +59,5 @@ https://zenn.dev/masaruxstudy/articles/7965c98289caf5
 テストテンプレートを自動生成できて便利
 https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
 
-
+## multi plexer
+入力から値を1つ選択するやつ
