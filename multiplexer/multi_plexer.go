@@ -23,12 +23,12 @@ func Multiplexer2to1(a, b, sel bool) bool {
 
 // 4to1マルチプレクサ(1bit)
 // selが00の時はaを返し、01の時はbを返し、10の時はcを返し、11の時はdを返す
-func Multiplexer4to1(a, b, c, d bool, sel bool2bit) (bool, error) {
+func Multiplexer4to1(a, b, c, d bool, sel bool2bit) bool {
 	return Multiplexer2to1(
-		Multiplexer2to1(a, b, sel.b1),
-		Multiplexer2to1(c, d, sel.b1),
-		sel.b0,
-	), nil
+		Multiplexer2to1(a, b, sel.b0),
+		Multiplexer2to1(c, d, sel.b0),
+		sel.b1,
+	)
 }
 
 // 00->{b1=0, b0=0}, 01->{b1=0, b0=1}, 10->{b1=1, b0=0}, 11->{b1=1, b0=1}
@@ -46,6 +46,15 @@ type bool4bit struct {
 }
 
 // 16to1マルチプレクサ(1bit)
+func Multiplexer16to1(i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15 bool, sel bool4bit) bool {
+	return Multiplexer4to1(
+		Multiplexer4to1(i0, i1, i2, i3, bool2bit{sel.b1, sel.b0}),
+		Multiplexer4to1(i4, i5, i6, i7, bool2bit{sel.b1, sel.b0}),
+		Multiplexer4to1(i8, i9, i10, i11, bool2bit{sel.b1, sel.b0}),
+		Multiplexer4to1(i12, i13, i14, i15, bool2bit{sel.b1, sel.b1}),
+		bool2bit{sel.b3, sel.b2},
+	)
+}
 
 // 2to1マルチプレクサ(4bit)
 
