@@ -97,7 +97,7 @@ func TestMultiplexer16to1(t *testing.T) {
 		i13 bool
 		i14 bool
 		i15 bool
-		sel bool4bit
+		sel Bool4bit
 	}
 	tests := []struct {
 		name string
@@ -106,22 +106,22 @@ func TestMultiplexer16to1(t *testing.T) {
 	}{
 		{
 			"Multiplexer16to1 0000の時はi0を返す",
-			args{true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, bool4bit{false, false, false, false}},
+			args{true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, Bool4bit{false, false, false, false}},
 			true,
 		},
 		{
 			"Multiplexer16to1 0101の時はi5を返す",
-			args{false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, bool4bit{false, true, false, true}},
+			args{false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, Bool4bit{false, true, false, true}},
 			true,
 		},
 		{
 			"Multiplexer16to1 1100の時はi10を返す",
-			args{false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, bool4bit{true, false, true, false}},
+			args{false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, Bool4bit{true, false, true, false}},
 			true,
 		},
 		{
 			"Multiplexer16to1 1111の時はi15を返す",
-			args{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, bool4bit{true, true, true, true}},
+			args{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, Bool4bit{true, true, true, true}},
 			true,
 		},
 	}
@@ -136,24 +136,24 @@ func TestMultiplexer16to1(t *testing.T) {
 
 func TestMultiplexer2to1_4bit(t *testing.T) {
 	type args struct {
-		a   bool4bit
-		b   bool4bit
+		a   Bool4bit
+		b   Bool4bit
 		sel bool
 	}
 	tests := []struct {
 		name string
 		args args
-		want bool4bit
+		want Bool4bit
 	}{
 		{
 			"Multiplexer2to1_4bit sel=falseの時はaを返す",
-			args{bool4bit{true, true, true, true}, bool4bit{false, false, false, false}, false},
-			bool4bit{true, true, true, true},
+			args{Bool4bit{true, true, true, true}, Bool4bit{false, false, false, false}, false},
+			Bool4bit{true, true, true, true},
 		},
 		{
 			"Multiplexer2to1_4bit sel=trueの時はbを返す",
-			args{bool4bit{false, false, false, false}, bool4bit{true, true, true, true}, true},
-			bool4bit{true, true, true, true},
+			args{Bool4bit{false, false, false, false}, Bool4bit{true, true, true, true}, true},
+			Bool4bit{true, true, true, true},
 		},
 	}
 	for _, tt := range tests {
@@ -167,120 +167,120 @@ func TestMultiplexer2to1_4bit(t *testing.T) {
 
 func TestMultiplexer16to1_4bit(t *testing.T) {
 	type args struct {
-		i0  bool4bit
-		i1  bool4bit
-		i2  bool4bit
-		i3  bool4bit
-		i4  bool4bit
-		i5  bool4bit
-		i6  bool4bit
-		i7  bool4bit
-		i8  bool4bit
-		i9  bool4bit
-		i10 bool4bit
-		i11 bool4bit
-		i12 bool4bit
-		i13 bool4bit
-		i14 bool4bit
-		i15 bool4bit
-		sel bool4bit
+		i0  Bool4bit
+		i1  Bool4bit
+		i2  Bool4bit
+		i3  Bool4bit
+		i4  Bool4bit
+		i5  Bool4bit
+		i6  Bool4bit
+		i7  Bool4bit
+		i8  Bool4bit
+		i9  Bool4bit
+		i10 Bool4bit
+		i11 Bool4bit
+		i12 Bool4bit
+		i13 Bool4bit
+		i14 Bool4bit
+		i15 Bool4bit
+		sel Bool4bit
 	}
 	tests := []struct {
 		name string
 		args args
-		want bool4bit
+		want Bool4bit
 	}{
 		{
 			"Multiplexer16to1_4bit 0000の時はi0を返す",
 			args{
-				bool4bit{true, true, true, true},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
+				Bool4bit{true, true, true, true},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
 			},
-			bool4bit{true, true, true, true},
+			Bool4bit{true, true, true, true},
 		},
 		{
 			"Multiplexer16to1_4bit 0101の時はi5を返す",
 			args{
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{true, true, true, true},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, true, false, true},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{true, true, true, true},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, true, false, true},
 			},
-			bool4bit{true, true, true, true},
+			Bool4bit{true, true, true, true},
 		},
 		{
 			"Multiplexer16to1_4bit 1010の時はi10を返す",
 			args{
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{true, true, true, true},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{true, false, true, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{true, true, true, true},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{true, false, true, false},
 			},
-			bool4bit{true, true, true, true},
+			Bool4bit{true, true, true, true},
 		},
 		{
 			"Multiplexer16to1_4bit 1111の時はi15を返す",
 			args{
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{false, false, false, false},
-				bool4bit{true, true, true, true},
-				bool4bit{true, true, true, true},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{false, false, false, false},
+				Bool4bit{true, true, true, true},
+				Bool4bit{true, true, true, true},
 			},
-			bool4bit{true, true, true, true},
+			Bool4bit{true, true, true, true},
 		},
 	}
 	for _, tt := range tests {
@@ -294,120 +294,120 @@ func TestMultiplexer16to1_4bit(t *testing.T) {
 
 func TestMultiplexer16to1_8bit(t *testing.T) {
 	type args struct {
-		i0  bool8bit
-		i1  bool8bit
-		i2  bool8bit
-		i3  bool8bit
-		i4  bool8bit
-		i5  bool8bit
-		i6  bool8bit
-		i7  bool8bit
-		i8  bool8bit
-		i9  bool8bit
-		i10 bool8bit
-		i11 bool8bit
-		i12 bool8bit
-		i13 bool8bit
-		i14 bool8bit
-		i15 bool8bit
-		sel bool4bit
+		i0  Bool8bit
+		i1  Bool8bit
+		i2  Bool8bit
+		i3  Bool8bit
+		i4  Bool8bit
+		i5  Bool8bit
+		i6  Bool8bit
+		i7  Bool8bit
+		i8  Bool8bit
+		i9  Bool8bit
+		i10 Bool8bit
+		i11 Bool8bit
+		i12 Bool8bit
+		i13 Bool8bit
+		i14 Bool8bit
+		i15 Bool8bit
+		sel Bool4bit
 	}
 	tests := []struct {
 		name string
 		args args
-		want bool8bit
+		want Bool8bit
 	}{
 		{
 			"Multiplexer16to1_8bit 0000の時はi0を返す",
 			args{
-				bool8bit{true, true, true, true, true, true, true, true},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool4bit{false, false, false, false},
+				Bool8bit{true, true, true, true, true, true, true, true},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool4bit{false, false, false, false},
 			},
-			bool8bit{true, true, true, true, true, true, true, true},
+			Bool8bit{true, true, true, true, true, true, true, true},
 		},
 		{
 			"Multiplexer16to1_8bit 0101の時はi5を返す",
 			args{
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{true, true, true, true, true, true, true, true},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool4bit{false, true, false, true},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{true, true, true, true, true, true, true, true},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool4bit{false, true, false, true},
 			},
-			bool8bit{true, true, true, true, true, true, true, true},
+			Bool8bit{true, true, true, true, true, true, true, true},
 		},
 		{
 			"Multiplexer16to1_8bit 1010の時はi10を返す",
 			args{
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{true, true, true, true, true, true, true, true},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool4bit{true, false, true, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{true, true, true, true, true, true, true, true},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool4bit{true, false, true, false},
 			},
-			bool8bit{true, true, true, true, true, true, true, true},
+			Bool8bit{true, true, true, true, true, true, true, true},
 		},
 		{
 			"Multiplexer16to1_8bit 1111の時はi15を返す",
 			args{
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{false, false, false, false, false, false, false, false},
-				bool8bit{true, true, true, true, true, true, true, true},
-				bool4bit{true, true, true, true},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{false, false, false, false, false, false, false, false},
+				Bool8bit{true, true, true, true, true, true, true, true},
+				Bool4bit{true, true, true, true},
 			},
-			bool8bit{true, true, true, true, true, true, true, true},
+			Bool8bit{true, true, true, true, true, true, true, true},
 		},
 	}
 	for _, tt := range tests {
