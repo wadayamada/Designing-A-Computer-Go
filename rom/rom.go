@@ -12,3 +12,7 @@ func (r Rom) Get(address multiplexer.Bool4bit) multiplexer.Bool8bit {
 		address,
 	)
 }
+
+type RomInterface interface {
+	Get(address multiplexer.Bool4bit) multiplexer.Bool8bit
+}
