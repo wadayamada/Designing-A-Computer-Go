@@ -34,7 +34,7 @@ NANDでCPUのエミュレーターを作っていく
 ### NOT
 NANDの両方に入力Aを入れれば良い
 ### AND
-AND(NAND)
+NOT(NAND)
 ### OR
 ド・モルガンの法則
 
@@ -61,3 +61,7 @@ https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
 
 ## multi plexer
 入力から値を1つ選択するやつ
+
+## やりたいこと
+- CI走らせたい
+- godoc書きたい
