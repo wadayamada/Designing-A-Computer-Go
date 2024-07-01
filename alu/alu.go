@@ -7,7 +7,7 @@ import (
 
 type ALUInterface interface {
 	// TODO: 値オブジェクトを入れたい
-	Run(opecode, imm, register Register, in multiplexer.Bool4bit) Register
+	Run(opecode, imm multiplexer.Bool4bit, register Register, in multiplexer.Bool4bit) Register
 }
 
 type ALU struct {

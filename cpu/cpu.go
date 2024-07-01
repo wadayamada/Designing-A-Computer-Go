@@ -8,11 +8,12 @@ import (
 )
 
 type CPU struct {
-	RegisterA    dff.DFF
-	RegisterB    dff.DFF
-	RegisterIP   dff.DFF
-	RegisterOut  dff.DFF
-	RegisterCF   dff.DFF
+	RegisterA    dff.DFF4bitInterface
+	RegisterB    dff.DFF4bitInterface
+	RegisterIP   dff.DFF4bitInterface
+	RegisterOut  dff.DFF4bitInterface
+	RegisterCF   dff.DFFInterface
+	In           multiplexer.Bool4bit
 	ALUInterface alu.ALUInterface
 }
 
@@ -20,16 +21,30 @@ type CPUInterface interface {
 	Run(rom rom.RomInterface)
 }
 
-func (c *CPU) Write(a, b, ip, out, cf multiplexer.Bool4bit) {
-	// TODO: registerに書き込む
+func (c *CPU) Read() {
+	c.RegisterA.Run()
+	c.RegisterB.Run()
+	c.RegisterIP.Run()
+	c.RegisterOut.Run()
+	c.RegisterCF.Run()
 }
 
+func (c *CPU) Write(a, b, ip, out multiplexer.Bool4bit, cf bool) {
+	c.RegisterA.Write(a)
+	c.RegisterB.Write(b)
+	c.RegisterIP.Write(ip)
+	c.RegisterOut.Write(out)
+	c.RegisterCF.Write(cf)
+}
+
+// TODO: テストも実装する
 func (c *CPU) Run(romInterface rom.RomInterface) {
 	for {
-		data := romInterface.Get(c.RegisterIP.D)
+		c.Read()
+		data := romInterface.Get(c.RegisterIP.Read())
 		opecode := multiplexer.Bool4bit{B3: data.B7, B2: data.B6, B1: data.B5, B0: data.B4}
 		imm := multiplexer.Bool4bit{B3: data.B3, B2: data.B2, B1: data.B1, B0: data.B0}
-		a, b, ip, out, cf := c.ALUInterface.Run(opecode, imm, c.RegisterA.D, c.RegisterB.D, c.RegisterIP.D, c.RegisterOut.D, c.RegisterCF.D)
-		c.Write(a, b, ip, out, cf)
+		next_register := c.ALUInterface.Run(opecode, imm, alu.Register{A: c.RegisterA.Read(), B: c.RegisterB.Read(), IP: c.RegisterIP.Read(), Out: c.RegisterOut.Read(), CF: c.RegisterCF.Read()}, c.In)
+		c.Write(next_register.A, next_register.B, next_register.IP, next_register.Out, next_register.CF)
 	}
 }
