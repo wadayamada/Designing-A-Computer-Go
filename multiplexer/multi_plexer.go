@@ -82,7 +82,7 @@ func Multiplexer16to1_4bit(i0, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12
 		Multiplexer4to1_4bit(i0, i1, i2, i3, bool2bit{sel.B1, sel.B0}),
 		Multiplexer4to1_4bit(i4, i5, i6, i7, bool2bit{sel.B1, sel.B0}),
 		Multiplexer4to1_4bit(i8, i9, i10, i11, bool2bit{sel.B1, sel.B0}),
-		Multiplexer4to1_4bit(i2, i13, i14, i15, bool2bit{sel.B1, sel.B1}),
+		Multiplexer4to1_4bit(i12, i13, i14, i15, bool2bit{sel.B1, sel.B0}),
 		bool2bit{sel.B3, sel.B2},
 	)
 }
