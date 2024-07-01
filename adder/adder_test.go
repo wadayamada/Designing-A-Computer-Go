@@ -146,7 +146,7 @@ func TestAdder_Run(t *testing.T) {
 		{
 			"Adder 1111, 1111",
 			fields{HalfAdder{}, FullAdder{HalfAdder{}}},
-			args{multiplexer.Bool4bit{B0: true, B1: true, B2: true, B3: true}, multiplexer.Bool4bit{B0: true, B1: true, B2: true, B3: true}},
+			args{multiplexer.Bool4bit{B0: false, B1: true, B2: true, B3: true}, multiplexer.Bool4bit{B0: true, B1: true, B2: true, B3: true}},
 			AddResult_4bit{Cf: true, Sum: multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: false}},
 		},
 	}
