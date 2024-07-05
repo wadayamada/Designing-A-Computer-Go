@@ -65,11 +65,11 @@ type RSFF struct {
 	Q_not bool
 }
 
-func (rsff RSFF) Read() bool {
+func (rsff *RSFF) Read() bool {
 	return rsff.Q
 }
 
-func (rsff RSFF) Run(Reset bool, Set bool) (bool, error) {
+func (rsff *RSFF) Run(Reset bool, Set bool) (bool, error) {
 	if Reset && Set {
 		return false, errors.New("Reset and Set are both true")
 	}

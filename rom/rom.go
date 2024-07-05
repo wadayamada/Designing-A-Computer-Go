@@ -3,12 +3,12 @@ package rom
 import "computer/multiplexer"
 
 type Rom struct {
-	m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15 multiplexer.Bool8bit
+	M0, M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14, M15 multiplexer.Bool8bit
 }
 
 func (r Rom) Get(address multiplexer.Bool4bit) multiplexer.Bool8bit {
 	return multiplexer.Multiplexer16to1_8bit(
-		r.m0, r.m1, r.m2, r.m3, r.m4, r.m5, r.m6, r.m7, r.m8, r.m9, r.m10, r.m11, r.m12, r.m13, r.m14, r.m15,
+		r.M0, r.M1, r.M2, r.M3, r.M4, r.M5, r.M6, r.M7, r.M8, r.M9, r.M10, r.M11, r.M12, r.M13, r.M14, r.M15,
 		address,
 	)
 }
