@@ -13,30 +13,43 @@ type DFF4bit struct {
 }
 
 type DFF4bitInterface interface {
-	Run()
 	Read() multiplexer.Bool4bit
 	Write(multiplexer.Bool4bit)
 }
 
-// TODO: DFFを論理ゲートでちゃんと実装する
-type DFF struct {
-	D bool
-	Q bool
+type DFFInterface interface {
+	Read() bool
+	Write(bool) bool
 }
 
-type DFFInterface interface {
-	Run()
-	Read() bool
-	Write(bool)
+type DFF struct {
+	RSFFInterface RSFFInterface
+}
+
+func (dff DFF) Read() bool {
+	return dff.RSFFInterface.Read()
+}
+
+func (dff DFF) Write(D bool) bool {
+	clock := true
+	S := logicgate.AND{A: D, B: clock}.Out()
+	R := logicgate.AND{A: logicgate.NOT{A: S}.Out(), B: clock}.Out()
+	Q, _ := dff.RSFFInterface.Run(R, S)
+	return Q
 }
 
 type RSFFInterface interface {
-	Run(Reset bool, Set bool) bool
+	Run(Reset bool, Set bool) (bool, error)
+	Read() bool
 }
 
 type RSFF struct {
 	Q     bool
 	Q_not bool
+}
+
+func (rsff RSFF) Read() bool {
+	return rsff.Q
 }
 
 func (rsff RSFF) Run(Reset bool, Set bool) (bool, error) {
