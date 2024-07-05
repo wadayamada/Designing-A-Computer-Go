@@ -146,25 +146,25 @@ func TestDFF_Write(t *testing.T) {
 	}{
 		{
 			"DFF false",
-			fields{RSFF{Q: false, Q_not: true}},
+			fields{&RSFF{Q: false, Q_not: true}},
 			args{false},
 			false,
 		},
 		{
 			"DFF false",
-			fields{RSFF{Q: true, Q_not: false}},
+			fields{&RSFF{Q: true, Q_not: false}},
 			args{false},
 			false,
 		},
 		{
 			"DFF true",
-			fields{RSFF{Q: false, Q_not: true}},
+			fields{&RSFF{Q: false, Q_not: true}},
 			args{true},
 			true,
 		},
 		{
 			"DFF true",
-			fields{RSFF{Q: true, Q_not: false}},
+			fields{&RSFF{Q: true, Q_not: false}},
 			args{true},
 			true,
 		},
@@ -192,12 +192,12 @@ func TestDFF_Read(t *testing.T) {
 	}{
 		{
 			"DFF false",
-			fields{RSFF{Q: false, Q_not: true}},
+			fields{&RSFF{Q: false, Q_not: true}},
 			false,
 		},
 		{
 			"DFF true",
-			fields{RSFF{Q: true, Q_not: false}},
+			fields{&RSFF{Q: true, Q_not: false}},
 			true,
 		},
 	}
@@ -232,10 +232,10 @@ func TestDFF4bit_Write(t *testing.T) {
 		{
 			"DFF4bit false, false, false, false",
 			fields{
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
 			},
 			args{multiplexer.Bool4bit{B0: false, B1: false, B2: false, B3: false}},
 			multiplexer.Bool4bit{B0: false, B1: false, B2: false, B3: false},
@@ -243,10 +243,10 @@ func TestDFF4bit_Write(t *testing.T) {
 		{
 			"DFF4bit true, true, true, true",
 			fields{
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
 			},
 			args{multiplexer.Bool4bit{B0: true, B1: true, B2: true, B3: true}},
 			multiplexer.Bool4bit{B0: true, B1: true, B2: true, B3: true},
@@ -254,10 +254,10 @@ func TestDFF4bit_Write(t *testing.T) {
 		{
 			"DFF4bit false, true, false, true",
 			fields{
-				DFF{RSFF{Q: true, Q_not: false}},
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: true, Q_not: false}},
-				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: true, Q_not: false}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: true, Q_not: false}},
+				DFF{&RSFF{Q: false, Q_not: true}},
 			},
 			args{multiplexer.Bool4bit{B0: false, B1: true, B2: false, B3: true}},
 			multiplexer.Bool4bit{B0: false, B1: true, B2: false, B3: true},
@@ -293,30 +293,30 @@ func TestDFF4bit_Read(t *testing.T) {
 		{
 			"DFF4bit false, false, false, false",
 			fields{
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: false, Q_not: true}},
 			},
 			multiplexer.Bool4bit{B0: false, B1: false, B2: false, B3: false},
 		},
 		{
 			"DFF4bit true, true, true, true",
 			fields{
-				DFF{RSFF{Q: true, Q_not: false}},
-				DFF{RSFF{Q: true, Q_not: false}},
-				DFF{RSFF{Q: true, Q_not: false}},
-				DFF{RSFF{Q: true, Q_not: false}},
+				DFF{&RSFF{Q: true, Q_not: false}},
+				DFF{&RSFF{Q: true, Q_not: false}},
+				DFF{&RSFF{Q: true, Q_not: false}},
+				DFF{&RSFF{Q: true, Q_not: false}},
 			},
 			multiplexer.Bool4bit{B0: true, B1: true, B2: true, B3: true},
 		},
 		{
 			"DFF4bit false, true, false, true",
 			fields{
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: true, Q_not: false}},
-				DFF{RSFF{Q: false, Q_not: true}},
-				DFF{RSFF{Q: true, Q_not: false}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: true, Q_not: false}},
+				DFF{&RSFF{Q: false, Q_not: true}},
+				DFF{&RSFF{Q: true, Q_not: false}},
 			},
 			multiplexer.Bool4bit{B0: false, B1: true, B2: false, B3: true},
 		},
