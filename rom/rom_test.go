@@ -160,22 +160,22 @@ func TestRom_Get(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			r := Rom{
-				m0:  tt.fields.m0,
-				m1:  tt.fields.m1,
-				m2:  tt.fields.m2,
-				m3:  tt.fields.m3,
-				m4:  tt.fields.m4,
-				m5:  tt.fields.m5,
-				m6:  tt.fields.m6,
-				m7:  tt.fields.m7,
-				m8:  tt.fields.m8,
-				m9:  tt.fields.m9,
-				m10: tt.fields.m10,
-				m11: tt.fields.m11,
-				m12: tt.fields.m12,
-				m13: tt.fields.m13,
-				m14: tt.fields.m14,
-				m15: tt.fields.m15,
+				M0:  tt.fields.m0,
+				M1:  tt.fields.m1,
+				M2:  tt.fields.m2,
+				M3:  tt.fields.m3,
+				M4:  tt.fields.m4,
+				M5:  tt.fields.m5,
+				M6:  tt.fields.m6,
+				M7:  tt.fields.m7,
+				M8:  tt.fields.m8,
+				M9:  tt.fields.m9,
+				M10: tt.fields.m10,
+				M11: tt.fields.m11,
+				M12: tt.fields.m12,
+				M13: tt.fields.m13,
+				M14: tt.fields.m14,
+				M15: tt.fields.m15,
 			}
 			if got := r.Get(tt.args.address); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Rom.Get() = %v, want %v", got, tt.want)
