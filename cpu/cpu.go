@@ -21,14 +21,6 @@ type CPUInterface interface {
 	Run(rom rom.RomInterface)
 }
 
-func (c *CPU) Read() {
-	c.RegisterA.Run()
-	c.RegisterB.Run()
-	c.RegisterIP.Run()
-	c.RegisterOut.Run()
-	c.RegisterCF.Run()
-}
-
 func (c *CPU) Write(a, b, ip, out multiplexer.Bool4bit, cf bool) {
 	c.RegisterA.Write(a)
 	c.RegisterB.Write(b)
@@ -40,7 +32,6 @@ func (c *CPU) Write(a, b, ip, out multiplexer.Bool4bit, cf bool) {
 // TODO: テストも実装する
 func (c *CPU) Run(romInterface rom.RomInterface) {
 	for {
-		c.Read()
 		data := romInterface.Get(c.RegisterIP.Read())
 		opecode := multiplexer.Bool4bit{B3: data.B7, B2: data.B6, B1: data.B5, B0: data.B4}
 		imm := multiplexer.Bool4bit{B3: data.B3, B2: data.B2, B1: data.B1, B0: data.B0}
