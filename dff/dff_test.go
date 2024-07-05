@@ -1,6 +1,8 @@
 package dff
 
 import (
+	"computer/multiplexer"
+	"reflect"
 	"testing"
 )
 
@@ -206,6 +208,129 @@ func TestDFF_Read(t *testing.T) {
 			}
 			if got := dff.Read(); got != tt.want {
 				t.Errorf("DFF.Read() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestDFF4bit_Write(t *testing.T) {
+	type fields struct {
+		DFF0 DFFInterface
+		DFF1 DFFInterface
+		DFF2 DFFInterface
+		DFF3 DFFInterface
+	}
+	type args struct {
+		D multiplexer.Bool4bit
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   multiplexer.Bool4bit
+	}{
+		{
+			"DFF4bit false, false, false, false",
+			fields{
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: false, Q_not: true}},
+			},
+			args{multiplexer.Bool4bit{B0: false, B1: false, B2: false, B3: false}},
+			multiplexer.Bool4bit{B0: false, B1: false, B2: false, B3: false},
+		},
+		{
+			"DFF4bit true, true, true, true",
+			fields{
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: false, Q_not: true}},
+			},
+			args{multiplexer.Bool4bit{B0: true, B1: true, B2: true, B3: true}},
+			multiplexer.Bool4bit{B0: true, B1: true, B2: true, B3: true},
+		},
+		{
+			"DFF4bit false, true, false, true",
+			fields{
+				DFF{RSFF{Q: true, Q_not: false}},
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: true, Q_not: false}},
+				DFF{RSFF{Q: false, Q_not: true}},
+			},
+			args{multiplexer.Bool4bit{B0: false, B1: true, B2: false, B3: true}},
+			multiplexer.Bool4bit{B0: false, B1: true, B2: false, B3: true},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			dff := DFF4bit{
+				DFF0: tt.fields.DFF0,
+				DFF1: tt.fields.DFF1,
+				DFF2: tt.fields.DFF2,
+				DFF3: tt.fields.DFF3,
+			}
+			if got := dff.Write(tt.args.D); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("DFF4bit.Write() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestDFF4bit_Read(t *testing.T) {
+	type fields struct {
+		DFF0 DFFInterface
+		DFF1 DFFInterface
+		DFF2 DFFInterface
+		DFF3 DFFInterface
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   multiplexer.Bool4bit
+	}{
+		{
+			"DFF4bit false, false, false, false",
+			fields{
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: false, Q_not: true}},
+			},
+			multiplexer.Bool4bit{B0: false, B1: false, B2: false, B3: false},
+		},
+		{
+			"DFF4bit true, true, true, true",
+			fields{
+				DFF{RSFF{Q: true, Q_not: false}},
+				DFF{RSFF{Q: true, Q_not: false}},
+				DFF{RSFF{Q: true, Q_not: false}},
+				DFF{RSFF{Q: true, Q_not: false}},
+			},
+			multiplexer.Bool4bit{B0: true, B1: true, B2: true, B3: true},
+		},
+		{
+			"DFF4bit false, true, false, true",
+			fields{
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: true, Q_not: false}},
+				DFF{RSFF{Q: false, Q_not: true}},
+				DFF{RSFF{Q: true, Q_not: false}},
+			},
+			multiplexer.Bool4bit{B0: false, B1: true, B2: false, B3: true},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			dff := DFF4bit{
+				DFF0: tt.fields.DFF0,
+				DFF1: tt.fields.DFF1,
+				DFF2: tt.fields.DFF2,
+				DFF3: tt.fields.DFF3,
+			}
+			if got := dff.Read(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("DFF4bit.Read() = %v, want %v", got, tt.want)
 			}
 		})
 	}

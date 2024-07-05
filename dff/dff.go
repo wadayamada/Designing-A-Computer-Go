@@ -6,15 +6,32 @@ import (
 	"errors"
 )
 
-// TODO: DFF4bitをDFFでちゃんと実装する
 type DFF4bit struct {
-	D multiplexer.Bool4bit
-	Q multiplexer.Bool4bit
+	DFF0 DFFInterface
+	DFF1 DFFInterface
+	DFF2 DFFInterface
+	DFF3 DFFInterface
+}
+
+func (dff DFF4bit) Read() multiplexer.Bool4bit {
+	Q0 := dff.DFF0.Read()
+	Q1 := dff.DFF1.Read()
+	Q2 := dff.DFF2.Read()
+	Q3 := dff.DFF3.Read()
+	return multiplexer.Bool4bit{B0: Q0, B1: Q1, B2: Q2, B3: Q3}
+}
+
+func (dff DFF4bit) Write(D multiplexer.Bool4bit) multiplexer.Bool4bit {
+	Q0 := dff.DFF0.Write(D.B0)
+	Q1 := dff.DFF1.Write(D.B1)
+	Q2 := dff.DFF2.Write(D.B2)
+	Q3 := dff.DFF3.Write(D.B3)
+	return multiplexer.Bool4bit{B0: Q0, B1: Q1, B2: Q2, B3: Q3}
 }
 
 type DFF4bitInterface interface {
 	Read() multiplexer.Bool4bit
-	Write(multiplexer.Bool4bit)
+	Write(multiplexer.Bool4bit) multiplexer.Bool4bit
 }
 
 type DFFInterface interface {
