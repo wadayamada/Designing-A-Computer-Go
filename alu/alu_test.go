@@ -15,7 +15,8 @@ func TestALU_Run(t *testing.T) {
 		opecode  multiplexer.Bool4bit
 		imm      multiplexer.Bool4bit
 		register Register
-		in       multiplexer.Bool4bit
+		in_a     multiplexer.Bool4bit
+		in_b     multiplexer.Bool4bit
 	}
 	tests := []struct {
 		name   string
@@ -36,7 +37,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: true},
@@ -59,7 +61,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: true},
@@ -82,7 +85,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: true},
@@ -105,7 +109,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
@@ -128,7 +133,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: true},
+				in_a: multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: true},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: true},
@@ -151,7 +157,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: true},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: true},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
@@ -174,7 +181,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
@@ -197,7 +205,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
@@ -220,7 +229,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: true, B2: false, B1: false, B0: false},
@@ -243,7 +253,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
@@ -266,7 +277,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
@@ -289,7 +301,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  false,
 				},
-				in: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
@@ -312,7 +325,8 @@ func TestALU_Run(t *testing.T) {
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					CF:  true,
 				},
-				in: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 			},
 			Register{
 				A:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
@@ -328,7 +342,7 @@ func TestALU_Run(t *testing.T) {
 			alu := ALU{
 				AdderInterface: tt.fields.AdderInterface,
 			}
-			if got := alu.Run(tt.args.opecode, tt.args.imm, tt.args.register, tt.args.in); !reflect.DeepEqual(got, tt.want) {
+			if got := alu.Run(tt.args.opecode, tt.args.imm, tt.args.register, tt.args.in_a, tt.args.in_b); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("ALU.Run() = %v, want %v", got, tt.want)
 			}
 		})
