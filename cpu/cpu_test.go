@@ -31,7 +31,7 @@ func TestCPU_Run(t *testing.T) {
 		want   multiplexer.Bool4bit
 	}{
 		{
-			"CPU Run",
+			"1+1を計算して、結果をOUTする",
 			fields{
 				RegisterA:    dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
 				RegisterB:    dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
@@ -50,6 +50,61 @@ func TestCPU_Run(t *testing.T) {
 				},
 			},
 			multiplexer.Bool4bit{B3: false, B2: false, B1: true, B0: false},
+		},
+		{
+			"16-4(IN_A)を計算して、結果の12をOUTする",
+			fields{
+				RegisterA:    dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
+				RegisterB:    dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
+				RegisterIP:   dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
+				RegisterOut:  dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
+				RegisterCF:   dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}},
+				InA:          multiplexer.Bool4bit{B3: false, B2: true, B1: false, B0: false}, // 4
+				InB:          multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				ALUInterface: alu.ALU{AdderInterface: adder.Adder{HalfAdderInterface: adder.HalfAdder{}, FullAdderInterface: adder.FullAdder{HalfAdderInterface: adder.HalfAdder{}}}},
+			},
+			args{
+				rom.Rom{
+					M0: multiplexer.Bool8bit{B7: false, B6: false, B5: true, B4: false, B3: false, B2: false, B1: false, B0: false}, // IN A
+					M1: multiplexer.Bool8bit{B7: false, B6: true, B5: true, B4: true, B3: false, B2: false, B1: false, B0: false},   // MOV B, 0
+					M2: multiplexer.Bool8bit{B7: false, B6: true, B5: false, B4: true, B3: false, B2: false, B1: false, B0: true},   // ADD B, 1
+					M3: multiplexer.Bool8bit{B7: false, B6: false, B5: false, B4: false, B3: false, B2: false, B1: false, B0: true}, // ADD A, 1
+					M4: multiplexer.Bool8bit{B7: true, B6: true, B5: true, B4: false, B3: false, B2: false, B1: true, B0: false},    // JNC 2
+					M5: multiplexer.Bool8bit{B7: true, B6: false, B5: false, B4: true, B3: false, B2: false, B1: false, B0: false},  // OUT B
+				},
+			},
+			multiplexer.Bool4bit{B3: true, B2: true, B1: false, B0: false}, // 12
+		},
+		{
+			"4(IN_A)+8(IN_B)を計算して、結果12をOUTする",
+			fields{
+				RegisterA:    dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
+				RegisterB:    dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
+				RegisterIP:   dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
+				RegisterOut:  dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
+				RegisterCF:   dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}},
+				InA:          multiplexer.Bool4bit{B3: false, B2: false, B1: true, B0: true},  // 3
+				InB:          multiplexer.Bool4bit{B3: true, B2: false, B1: false, B0: false}, // 8
+				ALUInterface: alu.ALU{AdderInterface: adder.Adder{HalfAdderInterface: adder.HalfAdder{}, FullAdderInterface: adder.FullAdder{HalfAdderInterface: adder.HalfAdder{}}}},
+			},
+			args{
+				rom.Rom{
+					// まず16-3(IN_A)を計算して、結果13をAに書き込む
+					M0: multiplexer.Bool8bit{B7: false, B6: false, B5: true, B4: false, B3: false, B2: false, B1: false, B0: false}, // IN A
+					M1: multiplexer.Bool8bit{B7: false, B6: true, B5: true, B4: true, B3: false, B2: false, B1: false, B0: false},   // MOV B, 0
+					M2: multiplexer.Bool8bit{B7: false, B6: true, B5: false, B4: true, B3: false, B2: false, B1: false, B0: true},   // ADD B, 1
+					M3: multiplexer.Bool8bit{B7: false, B6: false, B5: false, B4: false, B3: false, B2: false, B1: false, B0: true}, // ADD A, 1
+					M4: multiplexer.Bool8bit{B7: true, B6: true, B5: true, B4: false, B3: false, B2: false, B1: true, B0: false},    // JNC 2
+					M5: multiplexer.Bool8bit{B7: false, B6: false, B5: false, B4: true, B3: false, B2: false, B1: false, B0: false}, // MOV A, B
+					// 13(A), 8(B)に、Aが16になるまで1を足すことで、8(B)+3になって、結果11をOUTする
+					M6:  multiplexer.Bool8bit{B7: false, B6: true, B5: true, B4: false, B3: false, B2: false, B1: false, B0: false},  // IN B
+					M7:  multiplexer.Bool8bit{B7: false, B6: true, B5: false, B4: true, B3: false, B2: false, B1: false, B0: true},   // ADD B, 1
+					M8:  multiplexer.Bool8bit{B7: false, B6: false, B5: false, B4: false, B3: false, B2: false, B1: false, B0: true}, // ADD A, 1
+					M9:  multiplexer.Bool8bit{B7: true, B6: true, B5: true, B4: false, B3: false, B2: true, B1: true, B0: true},      // JNC 7
+					M10: multiplexer.Bool8bit{B7: true, B6: false, B5: false, B4: true, B3: false, B2: false, B1: false, B0: false},  // OUT B
+				},
+			},
+			multiplexer.Bool4bit{B3: true, B2: false, B1: true, B0: true}, // 11
 		},
 	}
 	for _, tt := range tests {
