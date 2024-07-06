@@ -63,5 +63,4 @@ https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
 入力から値を1つ選択するやつ
 
 ## やりたいこと
-- CI走らせたい
 - godoc書きたい
