@@ -63,4 +63,12 @@ https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
 入力から値を1つ選択するやつ
 
 ## やりたいこと
+- チューリング完全であることを証明する
+- 既存の命令セットと比較をする
+- 算術演算を実装する
+- キッチンタイマーを実装する
+- fizzbuzzを実装する
+- 解説ややったことをまとめる
+
+## 時間があればやりたい
 - godoc書きたい
