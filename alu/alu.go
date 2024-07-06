@@ -7,7 +7,7 @@ import (
 
 type ALUInterface interface {
 	// TODO: 値オブジェクトを入れたい
-	Run(opecode, imm multiplexer.Bool4bit, register Register, in multiplexer.Bool4bit) Register
+	Run(opecode, imm multiplexer.Bool4bit, register Register, in_a, in_b multiplexer.Bool4bit) Register
 }
 
 type ALU struct {
@@ -22,11 +22,11 @@ type Register struct {
 	CF  bool
 }
 
-func (alu ALU) Run(opecode, imm multiplexer.Bool4bit, register Register, in multiplexer.Bool4bit) Register {
+func (alu ALU) Run(opecode, imm multiplexer.Bool4bit, register Register, in_a, in_b multiplexer.Bool4bit) Register {
 	// registerAの計算
 	result_add_a_imm := alu.AdderInterface.Run(register.A, imm)
 	next_a := multiplexer.Multiplexer16to1_4bit(
-		result_add_a_imm.Sum, register.B, in, imm,
+		result_add_a_imm.Sum, register.B, in_a, imm,
 		register.A, register.A, register.A, register.A,
 		register.A, register.A, register.A, register.A,
 		register.A, register.A, register.A, register.A,
@@ -36,7 +36,7 @@ func (alu ALU) Run(opecode, imm multiplexer.Bool4bit, register Register, in mult
 	result_add_b_imm := alu.AdderInterface.Run(register.B, imm)
 	next_b := multiplexer.Multiplexer16to1_4bit(
 		register.B, register.B, register.B, register.B,
-		register.A, result_add_b_imm.Sum, in, imm,
+		register.A, result_add_b_imm.Sum, in_b, imm,
 		register.B, register.B, register.B, register.B,
 		register.B, register.B, register.B, register.B,
 		opecode,

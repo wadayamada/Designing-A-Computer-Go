@@ -17,7 +17,8 @@ func TestCPU_Run(t *testing.T) {
 		RegisterIP   dff.DFF4bitInterface
 		RegisterOut  dff.DFF4bitInterface
 		RegisterCF   dff.DFFInterface
-		In           multiplexer.Bool4bit
+		InA          multiplexer.Bool4bit
+		InB          multiplexer.Bool4bit
 		ALUInterface alu.ALUInterface
 	}
 	type args struct {
@@ -37,7 +38,8 @@ func TestCPU_Run(t *testing.T) {
 				RegisterIP:   dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
 				RegisterOut:  dff.DFF4bit{DFF0: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF1: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF2: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}, DFF3: dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}}},
 				RegisterCF:   dff.DFF{RSFFInterface: &dff.RSFF{Q: false, Q_not: true}},
-				In:           multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				InA:          multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				InB:          multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 				ALUInterface: alu.ALU{AdderInterface: adder.Adder{HalfAdderInterface: adder.HalfAdder{}, FullAdderInterface: adder.FullAdder{HalfAdderInterface: adder.HalfAdder{}}}},
 			},
 			args{
@@ -58,7 +60,8 @@ func TestCPU_Run(t *testing.T) {
 				RegisterIP:   tt.fields.RegisterIP,
 				RegisterOut:  tt.fields.RegisterOut,
 				RegisterCF:   tt.fields.RegisterCF,
-				In:           tt.fields.In,
+				InA:          tt.fields.InA,
+				InB:          tt.fields.InB,
 				ALUInterface: tt.fields.ALUInterface,
 			}
 			if got := c.Run(tt.args.romInterface); !reflect.DeepEqual(got, tt.want) {
