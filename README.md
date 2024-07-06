@@ -7,8 +7,8 @@
 |  0100  |  MOV B, A  | B <- A|
 |  0011  |  MOV A, IMM | A <- IMM|
 |  0111  |  MOV B, IMM | B <- IMM|
-|  0010  |  IN A  | A <- IN|
-|  0110  |  IN B  | B <- IN|
+|  0010  |  IN A  | A <- IN_A|
+|  0110  |  IN B  | B <- IN_B|
 |  1001  |  OUT B  | OUT <- B|
 |  1011  |  OUT IMM  |OUT <- IMM|
 |  0000  |  ADD A, IMM  |A <- A+IMM|
