@@ -71,6 +71,7 @@ https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
   - 掛け算
   - 割り算
 - 解説ややったことをまとめる
+- 計算可能性の観点において、チューリングマシンより計算能力のある計算モデルはないんじゃなかったっけ？だからチューリング完全であるBrainF\*ckでは今回作ったCPU作れるし、今回作ったCPUでもBrainF\*ck作れそう
 
 ## 時間があればやりたい
 - godoc書きたい
