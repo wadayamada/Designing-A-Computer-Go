@@ -23,12 +23,14 @@ type Register struct {
 }
 
 func (alu ALU) Run(opecode, imm multiplexer.Bool4bit, register Register, in_a, in_b multiplexer.Bool4bit) Register {
+	result_add_a_b := alu.AdderInterface.Run(register.A, register.B)
+
 	// registerAの計算
 	result_add_a_imm := alu.AdderInterface.Run(register.A, imm)
 	next_a := multiplexer.Multiplexer16to1_4bit(
 		result_add_a_imm.Sum, register.B, in_a, imm,
 		register.A, register.A, register.A, register.A,
-		register.A, register.A, register.A, register.A,
+		result_add_a_b.Sum, register.A, register.A, register.A,
 		register.A, register.A, register.A, register.A,
 		opecode,
 	)
@@ -45,7 +47,7 @@ func (alu ALU) Run(opecode, imm multiplexer.Bool4bit, register Register, in_a, i
 	next_cf := multiplexer.Multiplexer16to1(
 		result_add_a_imm.Cf, register.CF, register.CF, register.CF,
 		register.CF, result_add_b_imm.Cf, register.CF, register.CF,
-		register.CF, register.CF, register.CF, register.CF,
+		result_add_a_b.Cf, register.CF, register.CF, register.CF,
 		register.CF, register.CF, register.CF, register.CF,
 		opecode,
 	)

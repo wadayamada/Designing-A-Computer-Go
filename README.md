@@ -13,6 +13,7 @@
 |  1011  |  OUT IMM  |OUT <- IMM|
 |  0000  |  ADD A, IMM  |A <- A+IMM|
 |  0101  |  ADD B, IMM  |B <- B+IMM|
+|  1000  |  ADD A, B | A <- A+B|
 |  1111  |  JMP IMM  | IP <- IMM|
 |  1110  |  JNC IMM  | if CF==0: IP <-IMM|
 |  その他  |  未定義 |　使用禁止|

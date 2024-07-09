@@ -265,6 +265,54 @@ func TestALU_Run(t *testing.T) {
 			},
 		},
 		{
+			"1000 ADD A=4, B=2 -> A=6, B=2",
+			fields{adder.Adder{HalfAdderInterface: adder.HalfAdder{}, FullAdderInterface: adder.FullAdder{HalfAdderInterface: adder.HalfAdder{}}}},
+			args{
+				opecode: multiplexer.Bool4bit{B3: true, B2: false, B1: false, B0: false},
+				imm:     multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				register: Register{
+					A:   multiplexer.Bool4bit{B3: false, B2: true, B1: false, B0: false},
+					B:   multiplexer.Bool4bit{B3: false, B2: false, B1: true, B0: false},
+					IP:  multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+					CF:  false,
+				},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+			},
+			Register{
+				A:   multiplexer.Bool4bit{B3: false, B2: true, B1: true, B0: false},
+				B:   multiplexer.Bool4bit{B3: false, B2: false, B1: true, B0: false},
+				IP:  multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: true},
+				Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				CF:  false,
+			},
+		},
+		{
+			"1000 ADD A=10, B=6 -> A=0, B=6, CF=1",
+			fields{adder.Adder{HalfAdderInterface: adder.HalfAdder{}, FullAdderInterface: adder.FullAdder{HalfAdderInterface: adder.HalfAdder{}}}},
+			args{
+				opecode: multiplexer.Bool4bit{B3: true, B2: false, B1: false, B0: false},
+				imm:     multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				register: Register{
+					A:   multiplexer.Bool4bit{B3: true, B2: false, B1: true, B0: false},
+					B:   multiplexer.Bool4bit{B3: false, B2: true, B1: true, B0: false},
+					IP:  multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+					CF:  false,
+				},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+			},
+			Register{
+				A:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				B:   multiplexer.Bool4bit{B3: false, B2: true, B1: true, B0: false},
+				IP:  multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: true},
+				Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				CF:  true,
+			},
+		},
+		{
 			"1111 JMP IMM",
 			fields{adder.Adder{HalfAdderInterface: adder.HalfAdder{}, FullAdderInterface: adder.FullAdder{HalfAdderInterface: adder.HalfAdder{}}}},
 			args{
