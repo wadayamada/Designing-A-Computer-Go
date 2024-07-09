@@ -67,7 +67,7 @@ https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
 - チューリング完全であることを証明する
 - 既存の命令セットと比較をする
 - 算術演算を実装する
-  - 足し算
+  - ~足し算~
   - 引き算
   - 掛け算
   - 割り算
