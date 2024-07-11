@@ -37,7 +37,7 @@ func (c *CPU) Run(romInterface rom.RomInterface) multiplexer.Bool4bit {
 		data := romInterface.Get(c.RegisterIP.Read())
 		opecode := multiplexer.Bool4bit{B3: data.B7, B2: data.B6, B1: data.B5, B0: data.B4}
 		imm := multiplexer.Bool4bit{B3: data.B3, B2: data.B2, B1: data.B1, B0: data.B0}
-		next_register := c.ALUInterface.Run(opecode, imm, alu.Register{A: c.RegisterA.Read(), B: c.RegisterB.Read(), IP: c.RegisterIP.Read(), Out: c.RegisterOut.Read(), CF: c.RegisterCF.Read()}, c.InA, c.InB)
+		next_register := c.ALUInterface.Run(opecode, imm, alu.Register{A: c.RegisterA.Read(), B: c.RegisterB.Read(), C: c.RegisterC.Read(), IP: c.RegisterIP.Read(), Out: c.RegisterOut.Read(), CF: c.RegisterCF.Read()}, c.InA, c.InB)
 		c.Write(next_register.A, next_register.B, next_register.C, next_register.IP, next_register.Out, next_register.CF)
 		// TODO: OUT Bの命令実行したら終了するようにしたが、いい感じにしたい
 		if (opecode == multiplexer.Bool4bit{B3: true, B2: false, B1: false, B0: true}) {
