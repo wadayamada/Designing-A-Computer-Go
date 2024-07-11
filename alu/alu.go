@@ -17,6 +17,7 @@ type ALU struct {
 type Register struct {
 	A   multiplexer.Bool4bit
 	B   multiplexer.Bool4bit
+	C   multiplexer.Bool4bit
 	IP  multiplexer.Bool4bit
 	Out multiplexer.Bool4bit
 	CF  bool
@@ -31,7 +32,7 @@ func (alu ALU) Run(opecode, imm multiplexer.Bool4bit, register Register, in_a, i
 		result_add_a_imm.Sum, register.B, in_a, imm,
 		register.A, register.A, register.A, register.A,
 		result_add_a_b.Sum, register.A, register.A, register.A,
-		register.A, register.A, register.A, register.A,
+		register.C, register.A, register.A, register.A,
 		opecode,
 	)
 	// registerBの計算
@@ -43,6 +44,15 @@ func (alu ALU) Run(opecode, imm multiplexer.Bool4bit, register Register, in_a, i
 		register.B, register.B, register.B, register.B,
 		opecode,
 	)
+	// registerCの計算
+	next_c := multiplexer.Multiplexer16to1_4bit(
+		register.C, register.C, register.C, register.C,
+		register.C, register.C, register.C, register.C,
+		register.C, register.C, register.A, register.C,
+		register.C, register.C, register.C, register.C,
+		opecode,
+	)
+
 	// キャリーフラグの計算
 	next_cf := multiplexer.Multiplexer16to1(
 		result_add_a_imm.Cf, register.CF, register.CF, register.CF,
@@ -68,5 +78,5 @@ func (alu ALU) Run(opecode, imm multiplexer.Bool4bit, register Register, in_a, i
 		register.Out, register.Out, register.Out, register.Out,
 		opecode,
 	)
-	return Register{A: next_a, B: next_b, IP: next_ip, Out: next_out, CF: next_cf}
+	return Register{A: next_a, B: next_b, C: next_c, IP: next_ip, Out: next_out, CF: next_cf}
 }
