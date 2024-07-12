@@ -123,6 +123,14 @@ https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
 ## やりたいこと
 - ~チューリング完全であることを証明する~
 - 既存の命令セットと比較をする
+  - 有名な命令セット
+    - arm
+    - risc
+    - x86
+    - x86-64
+    - jvm
+    - risc-v
+    - ref: https://ja.wikipedia.org/wiki/%E5%91%BD%E4%BB%A4%E3%82%BB%E3%83%83%E3%83%88
 - 算術演算を実装する
   - ~足し算~
   - ~引き算~
