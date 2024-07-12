@@ -48,35 +48,35 @@ brainfu\*ckはチューリング完全であるらしいので、今回のCPUで
 
 ### 実装する
 - pointerの値はregisterAに持つ
-  - `>`
+  - `>`: pointerの位置をincrement
     - ADD A, 1
-  - `<`
+  - `<`: pointerの位置をdecrement
     - ADD A, 15
-- MOV B, RAM[A]の命令を追加する
-  - `+`
+- MOV B, RAM[A]とMOV RAM[A], Bを追加する
+  - `+`: pointerの指す値をincrement
     - MOV B, RAM[A]  
     - ADD B, 1
     - MOV RAM[A], B 
-  - `-`
+  - `-`: pointerの指す値をdecrement
     - MOV B, RAM[A]  
     - ADD B, 15
     - MOV RAM[A], B 
-  - `.`
+  - `.`: pointerの指す値を出力する
     - MOV B, RAM[A]  
     - OUT B
-  - `,`
+  - `,`: 入力から1バイト読み込んで、pointerが指す場所に格納する
     - IN B
     - MOV RAM[A], B 
 - コンパイルの詳細は割愛する
-  - `[`
-    - コンパイルしたら、pointerの指す値が0だったら、IMMのアドレスにジャンプするという処理に帰着できそう
+  - `[`: pointerの指す値が0なら、対応する]の直後にジャンプする
+    - コンパイルしたら、"pointerの指す値が0だったら、IMMのアドレスにジャンプするという処理"に帰着できそう
     - pointerの指す値が0だったらIMMにジャンプする処理
-      - 16を足してCF=0だったら0なので、IMMにジャンプすれば良い
+      - 15を足してCF=0だったら0なので、IMMにジャンプすれば良い
         - 0: MOV B, RAM[A]
-        - 1: ADD B, 16
+        - 1: ADD B, 15
         - 2: JNC IMM
   - `]`
-    - コンパイルしたら、pointerの指す値が0じゃないなら、IMMのアドレスにジャンプする処理に帰着できそう
+    - コンパイルしたら、"pointerの指す値が0じゃないなら、IMMのアドレスにジャンプする処理"に帰着できそう
     - pointerの指す値が0じゃないなら、IMMにジャンプする処理
       - 15を足して、CF=1だったら0じゃないので、IMMにジャンプすれば良い
       - 0: MOV B, RAM[A]
@@ -121,7 +121,7 @@ https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
 入力から値を1つ選択するやつ
 
 ## やりたいこと
-- チューリング完全であることを証明する
+- ~チューリング完全であることを証明する~
 - 既存の命令セットと比較をする
 - 算術演算を実装する
   - ~足し算~
