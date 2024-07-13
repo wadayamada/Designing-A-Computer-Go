@@ -139,11 +139,11 @@ https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
     - jvm
     - risc-v
     - ref: https://ja.wikipedia.org/wiki/%E5%91%BD%E4%BB%A4%E3%82%BB%E3%83%83%E3%83%88
-- 算術演算を実装する
+- ~算術演算を実装する~
   - ~足し算~
   - ~引き算~
   - ~掛け算~
-  - 割り算
+  - ~割り算~
 - 解説ややったことをまとめる
 - ~計算可能性の観点において、チューリングマシンより計算能力のある計算モデルはないんじゃなかったっけ？だからチューリング完全であるBrainf\*ckでは今回作ったCPU作れるし、今回作ったCPUでもBrainf\*ck作れそう~
 
