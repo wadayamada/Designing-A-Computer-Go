@@ -149,3 +149,6 @@ https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
 
 ## 時間があればやりたい
 - godoc書きたい
+- アセンブラ言語でコーディングできるようにしたい
+- debugがしにくい
+- IPの計算をadderを使うんじゃなくてカウンターのFFを使いたい
