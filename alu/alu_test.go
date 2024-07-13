@@ -396,7 +396,7 @@ func TestALU_Run(t *testing.T) {
 					C:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					IP:  multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
-					CF:  true,
+					CF:  false,
 				},
 				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
@@ -407,7 +407,7 @@ func TestALU_Run(t *testing.T) {
 				C:   multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: true},
 				IP:  multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: true},
 				Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
-				CF:  true,
+				CF:  false,
 			},
 		},
 		{
@@ -422,7 +422,7 @@ func TestALU_Run(t *testing.T) {
 					C:   multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: true},
 					IP:  multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
-					CF:  true,
+					CF:  false,
 				},
 				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
 				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
@@ -433,7 +433,33 @@ func TestALU_Run(t *testing.T) {
 				C:   multiplexer.Bool4bit{B3: true, B2: true, B1: true, B0: true},
 				IP:  multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: true},
 				Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
-				CF:  true,
+				CF:  false,
+			},
+		},
+		{
+			"1101 SUB A, B",
+			fields{adder.Adder{HalfAdderInterface: adder.HalfAdder{}, FullAdderInterface: adder.FullAdder{HalfAdderInterface: adder.HalfAdder{}}}},
+			args{
+				opecode: multiplexer.Bool4bit{B3: true, B2: true, B1: false, B0: true},
+				imm:     multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				register: Register{
+					A:   multiplexer.Bool4bit{B3: false, B2: true, B1: false, B0: true},  // 5
+					B:   multiplexer.Bool4bit{B3: false, B2: false, B1: true, B0: false}, // 2
+					C:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+					IP:  multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+					Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+					CF:  false,
+				},
+				in_a: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				in_b: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+			},
+			Register{
+				A:   multiplexer.Bool4bit{B3: false, B2: false, B1: true, B0: true},  // 3
+				B:   multiplexer.Bool4bit{B3: false, B2: false, B1: true, B0: false}, // 2
+				C:   multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				IP:  multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: true},
+				Out: multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: false},
+				CF:  false,
 			},
 		},
 	}

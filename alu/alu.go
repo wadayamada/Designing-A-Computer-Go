@@ -2,6 +2,7 @@ package alu
 
 import (
 	"computer/adder"
+	"computer/logicgate"
 	"computer/multiplexer"
 )
 
@@ -26,13 +27,23 @@ type Register struct {
 func (alu ALU) Run(opecode, imm multiplexer.Bool4bit, register Register, in_a, in_b multiplexer.Bool4bit) Register {
 	result_add_a_b := alu.AdderInterface.Run(register.A, register.B)
 
+	// bの2の補数を取って、a-bを計算する
+	not_b := multiplexer.Bool4bit{
+		B3: logicgate.NOT{A: register.B.B3}.Out(),
+		B2: logicgate.NOT{A: register.B.B2}.Out(),
+		B1: logicgate.NOT{A: register.B.B1}.Out(),
+		B0: logicgate.NOT{A: register.B.B0}.Out(),
+	}
+	complement_b := alu.AdderInterface.Run(not_b, multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: true})
+	result_sub_a_b := alu.AdderInterface.Run(register.A, complement_b.Sum)
+
 	// registerAの計算
 	result_add_a_imm := alu.AdderInterface.Run(register.A, imm)
 	next_a := multiplexer.Multiplexer16to1_4bit(
 		result_add_a_imm.Sum, register.B, in_a, imm,
 		register.A, register.A, register.A, register.A,
 		result_add_a_b.Sum, register.A, register.A, register.A,
-		register.C, register.A, register.A, register.A,
+		register.C, result_sub_a_b.Sum, register.A, register.A,
 		opecode,
 	)
 	// registerBの計算
@@ -58,9 +69,10 @@ func (alu ALU) Run(opecode, imm multiplexer.Bool4bit, register Register, in_a, i
 		result_add_a_imm.Cf, register.CF, register.CF, register.CF,
 		register.CF, result_add_b_imm.Cf, register.CF, register.CF,
 		result_add_a_b.Cf, register.CF, register.CF, register.CF,
-		register.CF, register.CF, register.CF, register.CF,
+		register.CF, result_sub_a_b.Cf, register.CF, register.CF,
 		opecode,
 	)
+
 	// 命令ポインタの計算
 	result_add_ip_1 := alu.AdderInterface.Run(register.IP, multiplexer.Bool4bit{B3: false, B2: false, B1: false, B0: true})
 	next_ip := multiplexer.Multiplexer16to1_4bit(
