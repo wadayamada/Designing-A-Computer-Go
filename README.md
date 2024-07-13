@@ -128,24 +128,38 @@ https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
 ## multi plexer
 入力から値を1つ選択するやつ
 
+## 命令セットについて
+今回実装したのはopecodeが4bitで合計16個の命令を持つ拡張TD4
+既存のコンピュータで使われているCPUの命令セット等を調べる
+- CISC: Complex Instruction Set Computer
+  - x86, x86-64などがある
+    - x86は32bitで、x86-64は64bit
+  - Intel社, AMD社などで使われている
+- RISC: Reduced Instruction Set Computer
+  - arm, RISV-Vなどがある
+    - arm: ARM社のやつ
+      - Apple M1, M2はarm
+      - ARMへのライセンス料が必要
+    - RISC-V: バークレー校のやつ
+      - ライセンス料は不要
+    - MIPS
+      - 現在は使われてなさそう？
+      - 命令セットが綺麗
+      - RISCの後継に影響を与えた
+### armの命令セット
+https://www.fos.kuis.kyoto-u.ac.jp/~umatani/le4/arm_spec.html
+
+https://developer.arm.com/documentation/ddi0403/ee/?lang=en
+
+上記をざっと眺めた。MIPSの方がもっとシンプルらしい
+
+### MIPSの命令セット
+https://www.swlab.cs.okayama-u.ac.jp/~nom/lect/p3/concise-mips-instruction-set.html
+
+80以上あるんだな〜
+
 ## やりたいこと
-- ~チューリング完全であることを証明する~
-- 既存の命令セットと比較をする
-  - 有名な命令セット
-    - arm
-    - risc
-    - x86
-    - x86-64
-    - jvm
-    - risc-v
-    - ref: https://ja.wikipedia.org/wiki/%E5%91%BD%E4%BB%A4%E3%82%BB%E3%83%83%E3%83%88
-- ~算術演算を実装する~
-  - ~足し算~
-  - ~引き算~
-  - ~掛け算~
-  - ~割り算~
 - 解説ややったことをまとめる
-- ~計算可能性の観点において、チューリングマシンより計算能力のある計算モデルはないんじゃなかったっけ？だからチューリング完全であるBrainf\*ckでは今回作ったCPU作れるし、今回作ったCPUでもBrainf\*ck作れそう~
 
 ## 時間があればやりたい
 - godoc書きたい
