@@ -49,8 +49,6 @@ NANDはチューリング完全らしい(NANDがあればチューリング完�
 
 https://qiita.com/payanotty/items/ee0bd383cf9fdd335139
 
-NANDでCPUのエミュレーターを作っていく
-
 ## 今回作るCPUがチューリング完全であることを証明する
 brainfu\*ckはチューリング完全であるらしいので、今回のCPUでbrainfu\*kが作れることを証明する
 
@@ -165,9 +163,6 @@ https://developer.arm.com/documentation/ddi0403/ee/?lang=en
 https://www.swlab.cs.okayama-u.ac.jp/~nom/lect/p3/concise-mips-instruction-set.html
 
 80以上あるんだな〜
-
-## やりたいこと
-- 解説ややったことをまとめる
 
 ## 時間があればやりたい
 - godoc書きたい
