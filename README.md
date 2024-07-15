@@ -147,6 +147,7 @@ https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
 
 ## 命令セットについて
 今回実装したのはopecodeが4bitで合計16個の命令を持つ拡張TD4
+
 既存のコンピュータで使われているCPUの命令セット等を調べる
 - CISC: Complex Instruction Set Computer
   - x86, x86-64などがある
@@ -174,6 +175,10 @@ https://developer.arm.com/documentation/ddi0403/ee/?lang=en
 https://www.swlab.cs.okayama-u.ac.jp/~nom/lect/p3/concise-mips-instruction-set.html
 
 80以上あるんだな〜
+
+## 将来的にやりたいこと
+- 今回作ったCPUの上でOSを動かしたい
+- 今回作ったCPUをダイオードとかトランジスタとか抵抗を使って、ハードで作ってみたい
 
 ## 時間があればやりたい
 - godoc書きたい
