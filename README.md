@@ -21,7 +21,7 @@
 |  その他  |  未定義 |　使用禁止|
 
 ## CPU
-<img width="633" alt="スクリーンショット 2024-07-15 15 07 02" src="https://github.com/user-attachments/assets/7cfe6deb-8372-4e1c-8381-6ebcd9b4c86c">
+<img width="900" alt="スクリーンショット 2024-07-15 15 07 02" src="https://github.com/user-attachments/assets/7cfe6deb-8372-4e1c-8381-6ebcd9b4c86c">
 
 ## Flip Flop
 <img width="1224" alt="スクリーンショット 2024-07-15 15 09 04" src="https://github.com/user-attachments/assets/d925817a-1931-44bc-b5a2-747a7392f69b">
