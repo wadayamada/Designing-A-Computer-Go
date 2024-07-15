@@ -62,7 +62,7 @@ brainfu\*ckはチューリング完全であるらしいので、今回のCPUで
 - `[`: pointerの指す値が0なら、対応する]の直後にジャンプする
 - `]`: pointerの指す値が0じゃないなら、対応する[の直後にジャンプする
 
-### 実装する
+### 命令が実装できそうか確認
 - pointerの値はregisterAに持つ
   - `>`: pointerの位置をincrement
     - ADD A, 1
@@ -169,3 +169,4 @@ https://www.swlab.cs.okayama-u.ac.jp/~nom/lect/p3/concise-mips-instruction-set.h
 - アセンブラ言語でコーディングできるようにしたい
 - debugがしにくい
 - IPの計算をadderを使うんじゃなくてカウンターのFFを使いたい
+- MOV B, RAM[A]とMOV RAM[A], Bの実装
