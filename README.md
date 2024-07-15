@@ -1,5 +1,4 @@
 # CPUのエミュレーターをGoで作る
-命令セットは以下
 ## 命令セット(拡張TD4)
 |  opecode  |  アセンブラ  | 概要　|
 | ---- | ---- |----|
@@ -21,6 +20,24 @@
 |  1101  |  SUB A, B | A <- A-B|
 |  その他  |  未定義 |　使用禁止|
 
+## CPU
+<img width="633" alt="スクリーンショット 2024-07-15 15 07 02" src="https://github.com/user-attachments/assets/7cfe6deb-8372-4e1c-8381-6ebcd9b4c86c">
+
+## Flip Flop
+<img width="1224" alt="スクリーンショット 2024-07-15 15 09 04" src="https://github.com/user-attachments/assets/d925817a-1931-44bc-b5a2-747a7392f69b">
+
+## ALU
+<img width="770" alt="スクリーンショット 2024-07-15 15 10 36" src="https://github.com/user-attachments/assets/7e526a42-270a-438f-b8aa-6ef05807d84f">
+
+## Adder
+<img width="1350" alt="スクリーンショット 2024-07-15 15 12 27" src="https://github.com/user-attachments/assets/34317b5f-4d7a-4347-b8a4-01cb6ae264b9">
+
+## Multiplexer
+<img width="1234" alt="スクリーンショット 2024-07-15 15 14 58" src="https://github.com/user-attachments/assets/f0d12d7f-44d7-4fe6-8667-07ffd9cefeea">
+
+## NOT, AND, OR
+<img width="932" alt="スクリーンショット 2024-07-15 15 15 57" src="https://github.com/user-attachments/assets/f5e55173-63c1-478e-aa30-c8da2d197714">
+
 ## チューリング完全
 チューリングマシンは特定の計算を行う計算モデルのこと。入力部に入力された二つの数字の和を計算するなど。
 万能チューリングマシンは渡された任意のチューリングマシンの動作を再現できる計算モデルのこと。
@@ -28,6 +45,7 @@
 
 万能チューリングマシンを模倣できる計算モデルはチューリング完全というらしい
 NANDはチューリング完全らしい(NANDがあればチューリング完全な計算機が作れるって意味だと思う)
+
 
 https://qiita.com/payanotty/items/ee0bd383cf9fdd335139
 
@@ -95,14 +113,7 @@ brainfu\*kはチューリング完全だから、チューリングマシンと�
 
 チューリング完全なものはお互いでお互いを作れる。brainfu\*kでも拡張TD4を作れる。
 
-## NANDでNOT, AND, ORを作る
 
-### NOT
-NANDの両方に入力Aを入れれば良い
-### AND
-NOT(NAND)
-### OR
-ド・モルガンの法則
 
 ## Goについて
 ### 基本的な書き方
@@ -124,9 +135,6 @@ https://zenn.dev/masaruxstudy/articles/7965c98289caf5
 ### 単体テストも実装する
 テストテンプレートを自動生成できて便利
 https://zenn.dev/nishisuke/articles/go-unit-test-with-code-generation
-
-## multi plexer
-入力から値を1つ選択するやつ
 
 ## 命令セットについて
 今回実装したのはopecodeが4bitで合計16個の命令を持つ拡張TD4
