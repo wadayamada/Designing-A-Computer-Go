@@ -27,7 +27,7 @@
 <img width="1224" alt="スクリーンショット 2024-07-15 15 09 04" src="https://github.com/user-attachments/assets/d925817a-1931-44bc-b5a2-747a7392f69b">
 
 ## ALU
-<img width="770" alt="スクリーンショット 2024-07-15 15 10 36" src="https://github.com/user-attachments/assets/7e526a42-270a-438f-b8aa-6ef05807d84f">
+<img width="500" alt="スクリーンショット 2024-07-15 15 10 36" src="https://github.com/user-attachments/assets/7e526a42-270a-438f-b8aa-6ef05807d84f">
 
 ## Adder
 <img width="1350" alt="スクリーンショット 2024-07-15 15 12 27" src="https://github.com/user-attachments/assets/34317b5f-4d7a-4347-b8a4-01cb6ae264b9">
